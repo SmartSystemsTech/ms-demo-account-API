@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_CONNECTION_IP:localhost}:${DB_CONNECTION_PORT:3308}/db?
+    username: ${DB_CONNECTION_USERNAME:user}
+    password: ${DB_CONNECTION_PASSWORD:password}
+    hikari:
+      connection-timeout: 100000
+      idle-timeout: 50000
+      max-lifetime: 2000000
+      minimum-idle: 5
+      maximum-pool-size: 30
+
+  jpa:
+    database: mysql
+    open-in-view: false
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+  liquibase:
+    enabled: true
+    drop-first: false
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    default-schema: db
